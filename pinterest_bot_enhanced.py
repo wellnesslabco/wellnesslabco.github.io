@@ -14,11 +14,8 @@ import argparse
 from datetime import datetime
 from pathlib import Path
 
-# Import existing automation
-import importlib.util
-spec = importlib.util.spec_from_file_location("automation", "/sessions/adoring-laughing-cori/pinterest_automation.py")
-automation = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(automation)
+# Import existing automation - FIXED for GitHub Actions
+import pinterest_automation as automation
 
 class EnhancedPinterestBot:
     """Pinterest bot with product tagging and AI descriptions"""
@@ -30,15 +27,17 @@ class EnhancedPinterestBot:
             "Authorization": f"Bearer {self.access_token}",
             "Content-Type": "application/json"
         }
-        self.output_dir = "/sessions/adoring-laughing-cori/mnt/outputs"
+        # Use current directory instead of hardcoded path
+        self.output_dir = os.getcwd()
 
     def load_credentials(self):
-        """Load API credentials"""
-        env_file = "/sessions/adoring-laughing-cori/.env"
+        """Load API credentials - FIXED for GitHub Actions"""
+        # Look for .env in current directory
+        env_file = ".env"
 
         if not os.path.exists(env_file):
             print("❌ ERROR: .env file not found!")
-            print("\n📋 Please create /sessions/adoring-laughing-cori/.env with:")
+            print("\n📋 Please create .env with:")
             print("PINTEREST_ACCESS_TOKEN=your_token")
             print("AMAZON_AFFILIATE_TAG=wellnesslabco-20")
             print("ANTHROPIC_API_KEY=your_claude_key (optional for AI descriptions)")
