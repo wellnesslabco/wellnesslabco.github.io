@@ -2,9 +2,8 @@ name: Daily Pinterest Post
 
 on:
   schedule:
-    # Runs at 9:00 AM UTC every day
     - cron: '0 9 * * *'
-  workflow_dispatch: # Allows manual testing
+  workflow_dispatch:
 
 jobs:
   post-to-pinterest:
@@ -30,9 +29,9 @@ jobs:
 
     - name: Run Pinterest bot
       run: |
-        python pinterest_bot_enhanced_UPDATED_FEB6.py --auto --no-ai
+        python pinterest_bot_enhanced.py --auto --no-ai
 
-    - name: Commit generated files (optional)
+    - name: Commit generated files
       run: |
         git config --local user.email "bot@wellnesslabco.com"
         git config --local user.name "Pinterest Bot"
