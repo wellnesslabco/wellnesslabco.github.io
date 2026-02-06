@@ -30,7 +30,7 @@ jobs:
 
     - name: Run Pinterest bot
       run: |
-        python pinterest_bot_enhanced.py --auto --no-ai
+        python pinterest_bot_enhanced_UPDATED_FEB6.py --auto --no-ai
 
     - name: Commit generated files (optional)
       run: |
